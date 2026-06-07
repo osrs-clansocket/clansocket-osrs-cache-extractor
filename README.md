@@ -146,8 +146,6 @@ package.json              node scripts for the extractor
 
 ## notes
 
-- the BestBudz-fork client / server split pipeline was removed. anything under
-  `extracted_osrs_cache/raw/` is the source of truth for the java renderer.
 - the renderer opens a hidden GLFW window for the OpenGL context. headless
   servers need a virtual display.
 - texture PNGs in the cache are tiny (17×18-ish). `TextureStore` upscales each
