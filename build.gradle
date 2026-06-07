@@ -1,0 +1,101 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(24)
+    }
+}
+
+application {
+    mainClass = 'com.clansocket.extractor.ClanSocketItemSpriteExtractor'
+    applicationDefaultJvmArgs = [
+        '-Dorg.lwjgl.util.NoChecks=true',
+        '-Dsun.java2d.opengl=true',
+    ]
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.lwjgl:lwjgl:3.4.1'
+    implementation 'org.lwjgl:lwjgl-opengl:3.4.1'
+    implementation 'org.lwjgl:lwjgl-glfw:3.4.1'
+    runtimeOnly 'org.lwjgl:lwjgl:3.4.1:natives-windows'
+    runtimeOnly 'org.lwjgl:lwjgl-opengl:3.4.1:natives-windows'
+    runtimeOnly 'org.lwjgl:lwjgl-glfw:3.4.1:natives-windows'
+
+    implementation 'com.google.code.gson:gson:2.13.2'
+    implementation 'org.jspecify:jspecify:1.0.0'
+}
+
+tasks.register('extractSprites', JavaExec) {
+    description = 'Render OSRS item icons as a 32/64/128/256 PNG pyramid using OpenGL.'
+    group = 'extraction'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.clansocket.extractor.ClanSocketItemSpriteExtractor'
+    jvmArgs = [
+        '-Dorg.lwjgl.util.NoChecks=true',
+        '-Dsun.java2d.opengl=true',
+        '-Xmx24g',
+        '-XX:+UseG1GC',
+        '-XX:MaxGCPauseMillis=50',
+    ]
+    if (project.hasProperty('args')) {
+        args project.args.split('\\s+')
+    }
+}
+
+tasks.register('extractObjects', JavaExec) {
+    description = 'Render OSRS object icons to game_objects_xl/<size>/<id>.png using OpenGL.'
+    group = 'extraction'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.clansocket.extractor.ClanSocketEntitySpriteExtractor'
+    jvmArgs = [
+        '-Dorg.lwjgl.util.NoChecks=true',
+        '-Dsun.java2d.opengl=true',
+        '-Xmx24g',
+        '-XX:+UseG1GC',
+        '-XX:MaxGCPauseMillis=50',
+    ]
+    args '--type', 'object'
+    if (project.hasProperty('args')) {
+        args project.args.split('\\s+')
+    }
+}
+
+tasks.register('inspect', JavaExec) {
+    description = 'Real-time model inspector with side panel of render toggles.'
+    group = 'extraction'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.clansocket.extractor.test.ClanSocketModelInspector'
+    jvmArgs = [
+        '-Dorg.lwjgl.util.NoChecks=true',
+        '-Xmx8g',
+    ]
+    if (project.hasProperty('args')) {
+        args project.args.split('\\s+')
+    }
+}
+
+tasks.register('extractNpcs', JavaExec) {
+    description = 'Render OSRS NPC icons to game_npcs_xl/<size>/<id>.png using OpenGL.'
+    group = 'extraction'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.clansocket.extractor.ClanSocketEntitySpriteExtractor'
+    jvmArgs = [
+        '-Dorg.lwjgl.util.NoChecks=true',
+        '-Dsun.java2d.opengl=true',
+        '-Xmx24g',
+        '-XX:+UseG1GC',
+        '-XX:MaxGCPauseMillis=50',
+    ]
+    args '--type', 'npc'
+    if (project.hasProperty('args')) {
+        args project.args.split('\\s+')
+    }
+}

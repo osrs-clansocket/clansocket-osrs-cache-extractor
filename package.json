@@ -1,0 +1,15 @@
+{
+  "name": "clansocket-osrs-cache-extractor",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "OSRS cache extractor + item/object/NPC icon renderer. Reads the RuneLite live cache, dumps configs/models/textures losslessly to extracted_osrs_cache/raw/, then renders sprites via LWJGL3 OpenGL (gradle extractSprites / extractObjects / extractNpcs).",
+  "scripts": {
+    "extract:raw": "node pipeline/lossless/extract-raw.mjs --out extracted_osrs_cache/raw",
+    "extract:models": "node pipeline/lossless/extract-models.mjs",
+    "extract:textures": "node pipeline/lossless/extract-textures.mjs"
+  },
+  "dependencies": {
+    "seek-bzip": "^2.0.0",
+    "pngjs": "^7.0.0"
+  }
+}
