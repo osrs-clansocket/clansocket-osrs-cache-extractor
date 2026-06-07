@@ -1,0 +1,10 @@
+{
+  "name": "clansocket-osrs-cache-web-inspector",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Standalone WebGL model inspector. Read-only — no extraction.",
+  "scripts": {
+    "start": "node server.mjs"
+  }
+}

@@ -525,6 +525,9 @@ public final class GPUIconRenderer {
       vy = t;
     }
 
+    vx = -vx;
+    vz = -vz;
+
     vx += offsetX;
     vy += offsetY;
     vz += offsetZ;

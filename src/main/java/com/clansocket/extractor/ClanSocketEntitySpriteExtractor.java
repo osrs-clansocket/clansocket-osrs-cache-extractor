@@ -294,6 +294,7 @@ public final class ClanSocketEntitySpriteExtractor {
       t1 = vy * cosYf - vz * sinYf;
       vz = vy * sinYf + vz * cosYf;
       vy = t1;
+      vx = -vx; vz = -vz;
       if (vx < rotMinX) rotMinX = vx; if (vx > rotMaxX) rotMaxX = vx;
       if (vy < rotMinY) rotMinY = vy; if (vy > rotMaxY) rotMaxY = vy;
       if (vz < rotMinZ) rotMinZ = vz; if (vz > rotMaxZ) rotMaxZ = vz;

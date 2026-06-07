@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ClanSocket Model Inspector</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <h1>ClanSocket Inspector</h1>
+    <div class="info" id="info">no item loaded</div>
+
+    <section>
+      <h2>Entity</h2>
+      <div class="row">
+        <label>Type</label>
+        <select id="entityType">
+          <option value="items">Item</option>
+          <option value="npcs">NPC</option>
+          <option value="objects">Object</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>ID</label>
+        <input type="number" id="itemId" value="9810" min="0" step="1">
+        <button id="loadBtn">Load</button>
+      </div>
+      <div class="row">
+        <label>Search</label>
+        <input type="text" id="searchInput" placeholder="name fragment">
+      </div>
+      <div id="searchResults" class="search-results"></div>
+    </section>
+
+    <section>
+      <h2>Camera</h2>
+      <div class="slider-row"><label>xan2d <span id="xan2dVal">128</span></label>
+        <input type="range" id="xan2d" min="0" max="2047" value="128"></div>
+      <div class="slider-row"><label>yan2d <span id="yan2dVal">0</span></label>
+        <input type="range" id="yan2d" min="0" max="2047" value="0"></div>
+      <div class="slider-row"><label>zan2d <span id="zan2dVal">0</span></label>
+        <input type="range" id="zan2d" min="0" max="2047" value="0"></div>
+      <div class="slider-row"><label>zoom <span id="zoomVal">1.0</span></label>
+        <input type="range" id="zoom" min="20" max="500" value="100"></div>
+    </section>
+
+    <section>
+      <h2>Render</h2>
+      <label><input type="checkbox" id="prioritySort" checked> priority sort + GL_LEQUAL</label>
+      <label><input type="checkbox" id="dualColor" checked> dual-side lighting</label>
+      <label><input type="checkbox" id="alphaBlend" checked> alpha blending</label>
+      <label><input type="checkbox" id="depthWrite" checked> depth write</label>
+      <label><input type="checkbox" id="cullFace"> GL_CULL_FACE</label>
+      <label><input type="checkbox" id="wireframe"> wireframe</label>
+      <div class="slider-row"><label>priorityZStep <span id="pzVal">13</span></label>
+        <input type="range" id="priorityZStep" min="0" max="30" value="13"></div>
+    </section>
+
+    <section>
+      <h2>Priority isolation</h2>
+      <div id="priorityButtons" class="priority-buttons"></div>
+      <p class="hint">Click a number to render only that priority group.</p>
+    </section>
+  </aside>
+
+  <main class="viewport">
+    <canvas id="gl" width="900" height="900"></canvas>
+    <div class="hint-overlay">drag to rotate · scroll to zoom · R to reload</div>
+  </main>
+</div>
+<script type="module" src="/inspector.js"></script>
+</body>
+</html>
